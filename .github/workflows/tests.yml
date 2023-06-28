@@ -46,5 +46,4 @@ jobs:
       env:
         DB_PORT: 5432
       run: |
-#        sudo service postgresql start
         python manage.py test
