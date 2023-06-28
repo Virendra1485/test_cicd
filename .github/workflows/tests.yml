@@ -1,29 +1,24 @@
-name: GDAL Workflow
-on:
-  push:
-    branches:
-      - main
+language: python
+python:
+  - "3.8"
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+services:
+  - postgresql
+  - postgis
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+env:
+  - DJANGO_SETTINGS_MODULE=myproject.settings.test
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.8
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install -y binutils libproj-dev gdal-bin
 
-      - name: Install GDAL dependencies
-        run: |
-          sudo add-apt-repository ppa:ubuntugis/ppa -y
-          sudo apt-get update
-          sudo apt-get install gdal-bin -y
-          pip install GDAL
+install:
+  - pip install -r requirements.txt
 
-      - name: Run your workflow steps
-        run: |
-          # Add your desired workflow steps here
+before_script:
+  - psql -c "CREATE DATABASE myproject_test;" -U postgres
+  - psql -c "CREATE EXTENSION postgis;" -U postgres -d myproject_test
+
+script:
+  - python manage.py test
