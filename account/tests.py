@@ -35,14 +35,12 @@ class UserSignupViewTestCase(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, self.signin_url)
 
-        # Check if the user was created with the correct location
         User = get_user_model()
         user = User.objects.get(username=self.user_data['username'])
         self.assertEqual(user.location.x, float(self.user_data['longitude']))
         self.assertEqual(user.location.y, float(self.user_data['latitude']))
 
     def test_signup_view_invalid_form(self):
-        # Submit an invalid form (missing required fields)
         invalid_data = {
             'username': 'testuser',
             'password1': 'testpassword',
@@ -53,6 +51,5 @@ class UserSignupViewTestCase(TestCase):
         self.assertFormError(response, 'form', 'longitude', 'This field is required.')
         self.assertFormError(response, 'form', 'latitude', 'This field is required.')
 
-        # Check if the user was not created
         User = get_user_model()
         self.assertFalse(User.objects.filter(username=self.user_data['username']).exists())
