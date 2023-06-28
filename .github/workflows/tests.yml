@@ -43,11 +43,13 @@ jobs:
         sudo apt-get install gdal-bin
         pip install psycopg2-binary
     - name: Run Tests
+      depends_on:
+        postgres
       env:
         DB_PORT: 5432
         POSTGRES_USER: postgres
         POSTGRES_PASSWORD: password
         POSTGRES_DB: test_db
-        POSTGRES_HOST: postgres
+        POSTGRES_HOST: 127.0.0.1
       run: |
         python manage.py test
