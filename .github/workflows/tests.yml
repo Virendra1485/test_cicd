@@ -3,7 +3,7 @@ name: Django Tests
 on:
   push:
     branches:
-      - main
+      - signin
   
 #  pull_request:
 #    branches:
