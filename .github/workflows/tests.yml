@@ -45,5 +45,9 @@ jobs:
     - name: Run Tests
       env:
         DB_PORT: 5432
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: password
+        POSTGRES_DB: test_db
+        POSTGRES_HOST: postgres
       run: |
         python manage.py test
