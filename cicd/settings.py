@@ -79,16 +79,25 @@ WSGI_APPLICATION = "cicd.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.contrib.gis.db.backends.postgis",
+#         "NAME": 'assignment7',
+#         "USER": 'postgres',
+#         "PASSWORD": 'Root#123',
+#         "HOST": 'localhost',
+#         "PORT": 5432,
+#     }
+# }
+
+PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
 DATABASES = {
-    "default": {
-        "ENGINE": "django.contrib.gis.db.backends.postgis",
-        "NAME": 'assignment7',
-        "USER": 'postgres',
-        "PASSWORD": 'Root#123',
-        "HOST": '127.0.0.1',
-        "PORT": 5432,
+    'default': {
+        'ENGINE': 'django.contrib.gis.db.backends.spatialite',
+        'NAME': os.path.join(PROJECT_DIR, 'database.db'),
     }
 }
+
 
 
 # Password validation
