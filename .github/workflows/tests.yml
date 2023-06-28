@@ -17,11 +17,11 @@ jobs:
     services:
       postgres:
         image: postgres:latest
-#        env:
-#          POSTGRES_USER: postgres
-#          POSTGRES_PASSWORD: password
-#          POSTGRES_DB: test_db
-#          POSTGRES_HOST: postgres
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: test_db
+          POSTGRES_HOST: postgres
         ports:
           - 5432
         options: >-
@@ -46,5 +46,5 @@ jobs:
       env:
         DB_PORT: 5432
       run: |
-        sudo service postgresql start
+#        sudo service postgresql start
         python manage.py test
