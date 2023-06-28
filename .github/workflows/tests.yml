@@ -1,22 +1,42 @@
-name: Run Tests
+name: Django Tests
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
+  
+#  pull_request:
+#    branches:
+#      - main
+
+# on:
+#   schedule:
+#     - cron:  '*/15 * * * *'
 
 jobs:
-  test:
+  build:
+
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Set up Python
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.7
       uses: actions/setup-python@v2
       with:
-        python-version: 3.x
-
+        python-version: 3.7
     - name: Install dependencies
-      run: pip install -r requirements.txt
-
-    - name: Run tests
-      run: python manage.py test
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Lint with flake8
+      run: |
+        pip install flake8
+        flake8
+    - name: Coverage report
+      run: |
+        pip install coverage
+        coverage run manage.py test
+        coverage report
+    - name: Django Testing
+      run: |
+        python3 manage.py test
