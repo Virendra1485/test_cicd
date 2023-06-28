@@ -1,21 +1,6 @@
 from django.contrib.auth import get_user_model
-from django.contrib.auth.models import User
-from django.contrib.messages import get_messages
-from django.contrib.sessions.middleware import SessionMiddleware
-from django.contrib.messages.middleware import MessageMiddleware
-from django.test import RequestFactory, TestCase
+from django.test import TestCase
 from django.urls import reverse
-
-from .views import UserSigninView
-from account.models import User
-from django.contrib.messages import get_messages
-from django.contrib.sessions.middleware import SessionMiddleware
-from django.contrib.messages.middleware import MessageMiddleware
-from django.contrib.auth.forms import AuthenticationForm
-from django.test import RequestFactory, TestCase
-from django.urls import reverse
-
-from .views import UserSigninView
 
 
 class UserSignupViewTestCase(TestCase):

@@ -91,6 +91,7 @@ WSGI_APPLICATION = "cicd.wsgi.application"
 # }
 
 PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
+print((PROJECT_DIR))
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.spatialite',
