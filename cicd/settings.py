@@ -19,7 +19,6 @@ load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -30,7 +29,6 @@ SECRET_KEY = "django-insecure-ty2t$rjw-z2cvqfpoqqxwd33&@mln4kmkd!(aqcuf3^y!$t+hj
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -75,7 +73,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "cicd.wsgi.application"
 
-
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
@@ -87,7 +84,15 @@ DATABASES = {
         "PASSWORD": os.environ.get("POSTGRES_PASSWORD"),
         "HOST": os.environ.get("POSTGRES_HOST"),
         "PORT": os.environ.get("POSTGRES_PORT"),
-    }
+    },
+    'test': {
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': 'test_db',
+        'USER': 'postgres',
+        'PASSWORD': 'Root#123',
+        'HOST': 'postgres',
+        'PORT': 5432,
+    },
 }
 
 # PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
@@ -98,7 +103,6 @@ DATABASES = {
 #         'NAME': os.path.join(PROJECT_DIR, 'database.db'),
 #     }
 # }
-
 
 
 # Password validation
@@ -113,7 +117,6 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
@@ -124,7 +127,6 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
